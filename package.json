@@ -1,0 +1,38 @@
+{
+  "name": "par-cypress-automation-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "clean:reports": "rimraf cypress/report/mochawesome cypress/screenshots",
+    "cypress:open": "CYPRESS_ENV=test npx cypress open",
+    "cypress:run": "npm run clean:reports && CYPRESS_ENV=test npx cypress run",
+    "cypress:run:tags": "npm run clean:reports && CYPRESS_ENV=test npx cypress run --env tags=@ui",
+    "cypress:run:local:tags": "npm run clean:reports && CYPRESS_ENV=test npx cypress run --env tags=@ui",
+    "cypress:run:env": "npm run clean:reports && CYPRESS_ENV=stage npx cypress run",
+    "report:merge": "node cypress/report/merge-reports.js",
+    "cypress:run:report": "npm run cypress:run && npm run report:merge",
+    "cypress:run:tags:report": "npm run cypress:run:tags && npm run report:merge",
+    "cypress:run:env:report": "npm run cypress:run:env && npm run report:merge"
+  }
+,
+  "keywords": [
+    "Cypress",
+    "Cucumber.js",
+    "Axe Core"
+  ],
+  "author": "Timothy.ajisafe@timztos.co.uk",
+  "license": "ISC",
+  "description": "Cypress - Primary Authority Register (PAR) Automation Test",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
+    "cypress": "^12.17.4",
+    "cypress-multi-reporters": "^2.0.5",
+    "dotenv": "^16.3.1",
+    "esbuild": "^0.19.12",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.2.0",
+    "rimraf": "^6.0.1"
+  }
+}

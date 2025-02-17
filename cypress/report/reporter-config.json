@@ -1,0 +1,15 @@
+{
+  "reporterEnabled": "mochawesome",
+  "mochawesomeReporterOptions": {
+    "reportDir": "cypress/report/mochawesome",
+    "overwrite": false,
+    "html": false,
+    "json": true,
+    "timestamp": "mmddyyyy_HHMMss",
+    "embeddedScreenshots": true,
+    "inlineAssets": true,
+    "reportPageTitle": "PAR Cypress Automation Report",
+    "reportTitle": "PAR Cypress Automation Test Execution",
+    "charts": true
+  }
+}

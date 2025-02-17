@@ -1,0 +1,8 @@
+/cypress/report/mochawesome/
+/cypress/videos/
+/.env.dev
+/.env.local
+/.env.stage
+/.env.test
+/cypress/screenshots/
+/node_modules/
