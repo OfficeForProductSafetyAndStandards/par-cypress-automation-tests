@@ -12,9 +12,9 @@
     "report:merge": "node cypress/report/merge-reports.js",
     "cypress:run:report": "npm run cypress:run && npm run report:merge",
     "cypress:run:tags:report": "npm run cypress:run:tags && npm run report:merge",
-    "cypress:run:env:report": "npm run cypress:run:env && npm run report:merge"
-  }
-,
+    "cypress:run:env:report": "npm run cypress:run:env && npm run report:merge",
+    "cypress:run:local:a11y": "npm run clean:reports && CYPRESS_ENV=test npx cypress run --env tags=@accessibility"
+  },
   "keywords": [
     "Cypress",
     "Cucumber.js",
@@ -26,7 +26,9 @@
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
+    "chalk": "^5.4.1",
     "cypress": "^12.17.4",
+    "cypress-axe": "^1.6.0",
     "cypress-multi-reporters": "^2.0.5",
     "dotenv": "^16.3.1",
     "esbuild": "^0.19.12",

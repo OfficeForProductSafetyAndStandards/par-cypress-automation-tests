@@ -6,3 +6,4 @@
 /.env.test
 /cypress/screenshots/
 /node_modules/
+/cypress/a11y-violations/

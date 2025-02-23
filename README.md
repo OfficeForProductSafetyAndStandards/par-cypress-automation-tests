@@ -43,7 +43,7 @@ npm run cypress:run
 ```
 ### Run Tests With Tags (UI tests):
 ```bash
-npm run cypress:run:ui
+npm run cypress:run:ui-tests
 ```
 ### Run Tests With Tags (API tests):
 ```bash

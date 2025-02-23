@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAR-4 Accessibility Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        h2 {
+            color: #007BFF;
+            margin-top: 20px;
+        }
+        p {
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<h1>PAR Accessibility Report</h1>
+<p>Detail report of PAR application accessibility compliance against the WCAG 2.1 AA / WCAG 2.2 AA standard.</p>
+<div id="report"></div>
+
+<script>
+    const csvPaths = ['par-accessibility-violations-2.csv', 'par-accessibility-violations-1.csv'];
+
+    function loadCSV(path, tableId, tableHeadId, tableBodyId, subheadingId) {
+        fetch(path)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(text => {
+                document.getElementById(subheadingId).textContent = path.split('/').pop();
+                displayCSV(text, tableId, tableHeadId, tableBodyId);
+            })
+            .catch(error => console.error('Error fetching the CSV file:', error));
+    }
+
+    function displayCSV(text, tableId, tableHeadId, tableBodyId) {
+        const lines = text.split('\n').filter(line => line.trim() !== '');
+        const tableHead = document.getElementById(tableHeadId);
+        const tableBody = document.getElementById(tableBodyId);
+
+        tableHead.innerHTML = '';
+        tableBody.innerHTML = '';
+
+        if (lines.length > 0) {
+            const headers = lines[0].split(',');
+            const headerRow = document.createElement('tr');
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header.trim();
+                headerRow.appendChild(th);
+            });
+            tableHead.appendChild(headerRow);
+
+            lines.slice(1).forEach(line => {
+                const row = document.createElement('tr');
+                const cells = line.split(',');
+                cells.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell.trim();
+                    row.appendChild(td);
+                });
+                tableBody.appendChild(row);
+            });
+        } else {
+            const noDataMsg = document.createElement('tr');
+            const td = document.createElement('td');
+            td.setAttribute('colspan', headers.length);
+            td.textContent = 'No data available';
+            noDataMsg.appendChild(td);
+            tableBody.appendChild(noDataMsg);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const reportDiv = document.getElementById('report');
+        csvPaths.forEach((path, index) => {
+            const subheadingId = `subheading${index}`;
+            const tableId = `csvTable${index}`;
+            const tableHeadId = `csvTableHead${index}`;
+            const tableBodyId = `csvTableBody${index}`;
+
+            const subheading = document.createElement('h2');
+            subheading.id = subheadingId;
+            reportDiv.appendChild(subheading);
+
+            const table = document.createElement('table');
+            table.id = tableId;
+
+            const thead = document.createElement('thead');
+            thead.id = tableHeadId;
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+            tbody.id = tableBodyId;
+            table.appendChild(tbody);
+
+            reportDiv.appendChild(table);
+
+            loadCSV(path, tableId, tableHeadId, tableBodyId, subheadingId);
+        });
+    });
+</script>
+</body>
+</html>
