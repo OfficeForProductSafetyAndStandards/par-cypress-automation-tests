@@ -7,7 +7,6 @@ const accessibilityActions = new AccessibilityActions();
 
 Given(/^axe is injected and I visit (.*)$/, function (pageTitleSubstring) {
     homePage.navigateToUrl(pageTitleSubstring);
-    cy.wait(1000);
     accessibilityActions.injectAxe();
     cy.window().should('have.property', 'axe');
 });
