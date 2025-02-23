@@ -12,8 +12,6 @@ Given(/^axe is injected and I visit (.*)$/, function (pageTitleSubstring) {
     cy.window().should('have.property', 'axe');
 });
 
-
-
 Then("page should not have accessibility violations", () => {
     accessibilityActions.injectAxe();
     accessibilityActions.checkAccessibility(WCAG_22_AA_STANDARD);
