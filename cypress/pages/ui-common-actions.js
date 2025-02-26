@@ -15,8 +15,16 @@ class UiCommonActions {
         cy.get(locator).should('be.visible').scrollIntoView().click();
     }
 
+    clickButtonByText(buttonText) {
+        cy.contains('button', buttonText).should('be.visible').click();
+    }
+
     elementShouldHaveText(locator, text) {
         cy.get(locator).should('be.visible').should('have.text', text);
+    }
+
+    elementContainsText(selector, text) {
+        cy.contains(selector, text).should('be.visible');
     }
 }
 

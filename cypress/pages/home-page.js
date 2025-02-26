@@ -1,6 +1,11 @@
 import UiCommonActions from './ui-common-actions';
 
-const TEXT_ELEMENT = 'h2';
+const MAIN_HEADER_ELEMENT = 'h1';
+const deepLinks = {
+    "Apply for a new partnership": "authority/partnership-application/initiate/start",
+    "PAR Home Page": "authority"
+
+};
 
 class HomePage extends UiCommonActions {
 
@@ -10,11 +15,11 @@ class HomePage extends UiCommonActions {
     }
 
     navigateUsingDeepLink(deepLink) {
-        this.openUrl(`${Cypress.env('BASE_UI_URL')}${deepLink}`);
+        this.openUrl(`${Cypress.env('BASE_UI_URL')}${deepLinks[deepLink]}`);
     }
 
     validateTextOnPage(text) {
-        this.elementShouldHaveText(TEXT_ELEMENT, text);
+        this.elementShouldHaveText(MAIN_HEADER_ELEMENT, text);
     }
 }
 

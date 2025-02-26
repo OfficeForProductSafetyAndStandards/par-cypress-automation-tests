@@ -5,8 +5,7 @@ import HomePage from '../../pages/home-page';
 const homePage = new HomePage();
 const accessibilityActions = new AccessibilityActions();
 
-Given(/^axe is injected and I visit (.*)$/, function (pageTitleSubstring) {
-    homePage.navigateToUrl(pageTitleSubstring);
+Given(/^axe is injected$/, function () {
     accessibilityActions.injectAxe();
     cy.window().should('have.property', 'axe');
 });
