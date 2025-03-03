@@ -3,8 +3,8 @@ const generator = require('mochawesome-report-generator');
 const path = require('path');
 
 async function generateReport() {
-    const jsonDir = path.join(__dirname, 'cypress', 'report', 'mochawesome');
-    const reportDir = path.join(__dirname, 'cypress', 'report', 'mochawesome', 'html');
+    const jsonDir = path.join(__dirname, '..', 'report', 'mochawesome');
+    const reportDir = path.join(__dirname, '..', 'report', 'mochawesome', 'html');
 
     const jsonReport = await merge({
         files: [`${jsonDir}/*.json`],

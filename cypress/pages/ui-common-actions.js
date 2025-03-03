@@ -20,11 +20,22 @@ class UiCommonActions {
     }
 
     elementShouldHaveText(locator, text) {
-        cy.get(locator).should('be.visible').should('have.text', text);
+        cy.get(locator).should('be.visible').should('have.text', text.trim());
     }
 
     elementContainsText(selector, text) {
         cy.contains(selector, text).should('be.visible');
+    }
+
+    elementShouldHaveTrimmedText(locator, expectedText) {
+        cy.get(locator)
+            .should('be.visible')
+            .invoke('text')
+            .then((actualText) => {
+                const normalize = (text) =>
+                    text.replace(/\s+/g, ' ').trim();
+                expect(normalize(actualText)).to.eq(normalize(expectedText));
+            });
     }
 }
 

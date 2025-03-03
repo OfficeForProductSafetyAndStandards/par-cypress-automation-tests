@@ -4,7 +4,6 @@ const MAIN_HEADER_ELEMENT = 'h1';
 const deepLinks = {
     "Apply for a new partnership": "authority/partnership-application/initiate/start",
     "PAR Home Page": "authority"
-
 };
 
 class HomePage extends UiCommonActions {

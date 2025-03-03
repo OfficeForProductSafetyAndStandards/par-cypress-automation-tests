@@ -1,0 +1,11 @@
+{
+  "header": "Confirm agreement to set up the partnership",
+  "insetText": "Before you can start a new application, you must have been in contact with the organization and have a written summary document detailing the partnership.",
+  "confirmationText": "Confirm that you meet the below criteria before continuing.",
+  "criteria": [
+    "The organisation is eligible to enter into a partnership",
+    "My local authority is suitable for nomination as the Primary authority",
+    "A written summary detailing the partnership has been created"
+  ],
+  "buttonText": "Continue"
+}

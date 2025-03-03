@@ -7,13 +7,13 @@
     "cypress:open": "npx cross-env CYPRESS_ENV=test npx cypress open",
     "cypress:run": "npm run clean:reports && npx cross-env CYPRESS_ENV=local npx cypress run",
     "cypress:run:tags": "npm run clean:reports && npx cross-env CYPRESS_ENV=test npx cypress run --env tags=@ui",
-    "cypress:run:local:tags": "npm run clean:reports && npx cross-env CYPRESS_ENV=test npx cypress run --env tags=@ui",
+    "cypress:run:local:tags": "npm run clean:reports && npx cross-env CYPRESS_ENV=local npx cypress run --env tags=@regression",
     "cypress:run:env": "npm run clean:reports && npx cross-env CYPRESS_ENV=stage npx cypress run",
     "report:merge": "node cypress/report/merge-reports.js",
     "cypress:run:report": "npm run cypress:run && npm run report:merge",
     "cypress:run:tags:report": "npm run cypress:run:tags && npm run report:merge",
     "cypress:run:env:report": "npm run cypress:run:env && npm run report:merge",
-    "cypress:run:local:a11y": "npm run clean:reports && npx cross-env CYPRESS_ENV=test npx cypress run --env tags=@accessibility",
+    "cypress:run:local:a11y": "npm run clean:reports && npx cross-env CYPRESS_ENV=local npx cypress run --env tags=@accessibility",
     "win:cypress:open": "npx cross-env CYPRESS_ENV=local npx cypress open"
   },
   "keywords": [

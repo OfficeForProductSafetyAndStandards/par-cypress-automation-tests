@@ -3,11 +3,11 @@ import HomePage from "../../pages/home-page";
 
 const homePage = new HomePage();
 
-Given(/^I am on (.*)$/, function (pageTitle) {
+Given(/^I am on the (.*)$/, function (pageTitle) {
     homePage.navigateToUrl(pageTitle)
 });
 
-Then(/^the page main header is (Primary Authority Register)$/, function (mainHeader) {
+Then(/^the page main header is (.*)$/, function (mainHeader) {
     homePage.validateTextOnPage(mainHeader);
 });
 
