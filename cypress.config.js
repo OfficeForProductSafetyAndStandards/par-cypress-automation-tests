@@ -9,6 +9,14 @@ const path = require('path');
 const environment = process.env.CYPRESS_ENV || 'test';
 dotenv.config({ path: `.env.${environment}` });
 
+const loadedEnv = {
+    BASE_UI_URL: process.env.BASE_UI_URL,
+    TEST_USER_ACCOUNT: process.env.TEST_USER_ACCOUNT,
+    TEST_USER_ACCOUNT_ONE: process.env.TEST_USER_ACCOUNT_ONE,
+    TEST_USER_ACCOUNT_TWO: process.env.TEST_USER_ACCOUNT_TWO,
+    TEST_USER_PASSWORD: process.env.TEST_USER_PASSWORD,
+};
+
 async function setupNodeEvents(on, config) {
     await preprocessor.addCucumberPreprocessorPlugin(on, config);
 
@@ -87,7 +95,5 @@ module.exports = defineConfig({
         configFile: 'cypress/report/reporter-config.json',
     },
 
-    env: {
-        BASE_UI_URL: process.env.BASE_UI_URL,
-    },
+    env:loadedEnv,
 });

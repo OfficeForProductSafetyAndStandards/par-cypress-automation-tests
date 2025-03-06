@@ -1,7 +1,7 @@
 import UiCommonActions from './ui-common-actions';
 
 const HEADING_SELECTOR = 'h1';
-const BUTTON_SELECTOR = 'a.govuk-button--start';
+const START_NOW_BUTTON = 'a.govuk-button--start';
 
 class StartPage extends UiCommonActions {
     validatePageContent(content) {
@@ -9,7 +9,7 @@ class StartPage extends UiCommonActions {
         content.paragraphs.forEach((text) => {
             this.elementContainsText('main', text);
         });
-        this.elementShouldHaveText(BUTTON_SELECTOR, content.button);
+        this.elementShouldHaveText(START_NOW_BUTTON, content.button);
     }
 
 }

@@ -18,3 +18,7 @@ When(/^I navigate to the (.*) page$/, function (deeplink) {
 When(/^I click on the (.*) button$/, function (button) {
     homePage.clickButtonByText(button)
 });
+
+When(/^I signed in using (.*)$/, function (user) {
+    homePage.signInWithEmailAndPassword(user)
+});

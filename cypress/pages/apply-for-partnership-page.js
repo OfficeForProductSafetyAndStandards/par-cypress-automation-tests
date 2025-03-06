@@ -1,7 +1,7 @@
 import UiCommonActions from './ui-common-actions';
 
 const HEADING_SELECTOR = 'h1';
-const SUBHEADING_SELECTOR = 'h3';
+const SUBHEADING_SELECTOR = 'h2.govuk-heading-m';
 const PARAGRAPH_SELECTOR = 'p';
 const BULLET_POINT_SELECTOR = 'ul.govuk-list--bullet li';
 const START_BUTTON = '#start-button';
