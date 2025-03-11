@@ -1,6 +1,6 @@
 {
-  "header": "Confirm agreement to set up the partnership",
-  "insetText": "Before you can start a new application, you must have been in contact with the organization and have a written summary document detailing the partnership.",
+  "header": "Confirm agreement to apply for partnership",
+  "insetText": "Before starting a new application, you must have been in contact with the partner and have a written summary document detailing the partnership.",
   "confirmationText": "Confirm that you meet the below criteria before continuing.",
   "criteria": [
     "The organisation is eligible to enter into a partnership",

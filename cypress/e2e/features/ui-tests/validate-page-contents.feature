@@ -1,7 +1,7 @@
 @regression @ui
-Feature: Apply For Partnership
+Feature: PAR Pages Navigation
 
-  Scenario: Validate Apply For Partnership Page Content
+  Scenario: Validate PAR Page Contents
     Given I am on the Start Page
     And I can read all information on the page
       | page       | content          |

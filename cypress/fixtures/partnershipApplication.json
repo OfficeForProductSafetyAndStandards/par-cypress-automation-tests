@@ -1,0 +1,11 @@
+{
+  "header": "Partnership Application",
+  "numberOfSections": 6,
+  "completed": 0,
+  "taskOne": {
+    "status": "Not Yet Started"
+  },
+  "taskTwo": {
+    "status": "Not Yet Started"
+  }
+}

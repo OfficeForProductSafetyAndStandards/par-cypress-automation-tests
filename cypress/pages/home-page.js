@@ -9,7 +9,8 @@ const START_NOW_BUTTON = 'a.govuk-button--start';
 
 const deepLinks = {
     "Apply for a new partnership": "authority/partnership-application/initiate/start",
-    "PAR Home Page": "authority"
+    "PAR Home Page": "authority",
+    "Select partnership type": "authority/partnership-application/initiate/partnership-type/select",
 };
 
 class HomePage extends UiCommonActions {

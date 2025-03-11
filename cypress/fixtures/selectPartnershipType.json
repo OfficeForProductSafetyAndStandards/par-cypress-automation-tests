@@ -1,0 +1,9 @@
+{
+  "heading": "Select partnership type",
+  "detailsSummary": "What's the difference between direct and coordinated partnership?",
+  "detailsText": {
+    "direct": "Direct partnership refers to a partnership between a local authority and an organisation, such as a business looking to seek advice for their own benefit.",
+    "coordinated": "Coordinated partnership refers to a partnership between a local authority and an organisation with members, such as a franchisees, looking to seek advice on behalf of their members."
+  },
+  "button": "Continue"
+}
