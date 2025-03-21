@@ -11,6 +11,7 @@ const deepLinks = {
     "Apply for a new partnership": "authority/partnership-application/initiate/start",
     "PAR Home Page": "authority",
     "Select partnership type": "authority/partnership-application/initiate/partnership-type/select",
+    "Accept terms and conditions":"terms-conditions",
 };
 
 class HomePage extends UiCommonActions {
@@ -54,6 +55,10 @@ class HomePage extends UiCommonActions {
         }
 
         return { username, password };
+    }
+
+    validatePageUrlContainsString(subString) {
+        this.verifyPageUrlContains(subString);
     }
 
 }

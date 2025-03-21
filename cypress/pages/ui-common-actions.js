@@ -16,6 +16,10 @@ class UiCommonActions {
         cy.title().should('contain', substring);
     }
 
+    verifyPageUrlContains(substring) {
+        cy.url().should('contain', substring);
+    }
+
     sendKeys(locator, text) {
         cy.get(locator).should('be.visible').clear().type(text);
     }

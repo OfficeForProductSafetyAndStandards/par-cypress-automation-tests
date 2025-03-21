@@ -6,6 +6,8 @@ Feature: PAR Accessibility Tests
     And axe is injected
     And page should not have accessibility violations
     And I signed in using testUserAccount
+    And the page url has terms-conditions
+    And page should not have accessibility violations
     When I navigate to the PAR Home Page page
     And page should not have accessibility violations
     And I click on the Apply for a partnership button

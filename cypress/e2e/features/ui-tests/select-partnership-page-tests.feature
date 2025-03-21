@@ -4,6 +4,10 @@ Feature:  Select Partnership
   Scenario: Select Partnership Task
     Given I am on the Start Page
     And I signed in using testUserAccount
+    And I can read all information on the page
+      | page                         | content                       |
+      | AcceptTermsAndConditionsPage | acceptTermsAndConditions.json |
+ #    When I navigate to the PAR Home Page page
     When I navigate to the Select partnership type page
     And I can read all information on the page
       | page                      | content                    |

@@ -4,6 +4,9 @@ import ApplyForPartnershipPage from '../../pages/apply-for-partnership-page';
 import StartPage from "../../pages/start-page";
 import SelectPartnershipTypePage from "../../pages/select-partnership-type-page";
 import AddRegulatoryFunctionContactsPage from "../../pages/AddRegulatoryFunctionContactsPage";
+import AcceptTermsAndConditionsPage from "../../pages/AcceptTermsAndConditionsPage";
+import HomePage from "../../pages/home-page";
+
 
 const pages = {
     ConfirmAgreementPage: new ConfirmAgreementPage(),
@@ -11,6 +14,8 @@ const pages = {
     StartPage: new StartPage(),
     SelectPartnershipTypePage: new SelectPartnershipTypePage(),
     AddRegulatoryFunctionContactsPage: new AddRegulatoryFunctionContactsPage(),
+    AcceptTermsAndConditionsPage: new AcceptTermsAndConditionsPage(),
+    HomePage:new HomePage(),
 };
 
 Then(/^I can read all information on the page$/, function (dataTable) {
@@ -32,4 +37,8 @@ Then(/^I should see the following error messages on (.*)$/, function (pageObject
 
 Then(/^I navigate (back|forward) using browser$/, function (action) {
     pages['StartPage'].navigateUsingBrowser(action);
+});
+
+Then(/^the page url has (.*)$/, function (urlSubString) {
+    pages['HomePage'].validatePageUrlContainsString(urlSubString);
 });
