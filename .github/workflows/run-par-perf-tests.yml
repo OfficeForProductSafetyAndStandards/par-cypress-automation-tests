@@ -40,7 +40,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: k6-html-report
-          path: results/summary.html
+          path: k6-results/summary.html
+          if-no-files-found: warn
+          compression-level: 6
+          overwrite: false
+
 
       - name: Upload Raw Summary (JSON)
         uses: actions/upload-artifact@v4
