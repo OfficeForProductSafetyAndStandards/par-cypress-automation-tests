@@ -1,0 +1,37 @@
+name: Run PAR Performance Tests (K6 to Grafana via Docker)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-perf-tests:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Start Docker Services (Grafana + InfluxDB)
+        run: docker-compose -f k6/docker-compose.yml up -d
+
+      - name: Wait for InfluxDB to be Ready
+        run: |
+          echo "⏳ Waiting for InfluxDB to be ready..."
+          sleep 10
+
+      - name: Run K6 Load Test and Send to InfluxDB
+        run: |
+          chmod +x ./k6/run-perf-grafana.sh
+          ./k6/run-perf-grafana.sh
+
+      - name: Stop Docker Services
+        if: always()
+        run: docker-compose -f k6/docker-compose.yml down

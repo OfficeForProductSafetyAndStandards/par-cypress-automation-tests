@@ -12,6 +12,7 @@ export const options = {
 
 export default function () {
     const BASE_URL = __ENV.PERF_URL;
+    console.log(`🔍 PERF_URL used: ${BASE_URL}`);
 
     const res = http.get(BASE_URL);
 
