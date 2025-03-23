@@ -1,14 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 
-const summaryPath = path.resolve(__dirname, '../../k6-results/summary.json');
-const outputPath = path.resolve(__dirname, '../../k6-results/summary.html');
+const summaryPath = path.resolve(__dirname, './summary.json');
+const outputPath = path.resolve(__dirname, './summary.html');
 
 
 if (!fs.existsSync(summaryPath)) {
-    console.error('❌ summary.json not found. Run a k6 test first.');
-    process.exit(1);
+    console.warn('⚠️  summary.json not found. Skipping report generation.');
+    process.exit(0);
 }
+
 
 const data = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
 
