@@ -20,6 +20,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install K6
+        run: |
+          curl -s https://packagecloud.io/install/repositories/loadimpact/k6/script.deb.sh | sudo bash
+          sudo apt-get install k6
+
       - name: Set PERF_URL for K6
         run: |
           echo "PERF_URL=https://www.timztos.co.uk/" >> $GITHUB_ENV
