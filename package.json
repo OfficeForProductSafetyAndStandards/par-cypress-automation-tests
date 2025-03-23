@@ -14,7 +14,11 @@
     "cypress:run:tags:report": "npm run cypress:run:tags && npm run report:merge",
     "cypress:run:env:report": "npm run cypress:run:env && npm run report:merge",
     "cypress:run:local:a11y": "npm run clean:reports && npx cross-env CYPRESS_ENV=local npx cypress run --env tags=@accessibility",
-    "win:cypress:open": "npx cross-env CYPRESS_ENV=local npx cypress open"
+    "win:cypress:open": "npx cross-env CYPRESS_ENV=local npx cypress open",
+    "perf:test": "export $(node k6/load-env.js) && k6 run --env PERF_URL=$PERF_URL k6/scripts/sample-load-test.js",
+    "perf:report": "node k6/scripts/convert-to-html.js",
+    "perf:run": "npm run perf:test && npm run perf:report"
+
   },
   "keywords": [
     "Cypress",
@@ -38,5 +42,8 @@
     "mochawesome-merge": "^5.0.0",
     "mochawesome-report-generator": "^6.2.0",
     "rimraf": "^6.0.1"
+  },
+  "dependencies": {
+    "k6": "^0.0.0"
   }
 }
