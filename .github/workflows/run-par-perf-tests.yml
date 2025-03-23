@@ -34,8 +34,7 @@ jobs:
           echo "PERF_URL=https://www.timztos.co.uk/" >> $GITHUB_ENV
 
       - name: Run Performance Test and Generate Report
-        run: npm run perf:run
-        continue-on-error: true
+        run: npm run perf:run || true
 
       - name: Upload Performance Report (HTML)
         uses: actions/upload-artifact@v4

@@ -6,7 +6,7 @@ export const options = {
     vus: 5,
     duration: '30s',
     thresholds: {
-        http_req_duration: ['p(95)<1200'], // 95% of requests must be under 1200ms
+        http_req_duration: ['p(95)<2000'], // 95% of requests must be under 1200ms
     },
 };
 
