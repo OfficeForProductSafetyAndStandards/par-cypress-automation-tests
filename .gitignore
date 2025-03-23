@@ -7,3 +7,5 @@
 /cypress/screenshots/
 /node_modules/
 /cypress/a11y-violations/
+/k6-results/summary.html
+/k6-results/summary.json
