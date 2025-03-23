@@ -34,9 +34,7 @@ jobs:
           echo "PERF_URL=https://www.timztos.co.uk/" >> $GITHUB_ENV
 
       - name: Run Performance Test and Generate Report
-        run: |
-          npm run perf:test || true
-          node k6-results/convert-to-html.js
+        run: npm run perf:run
 
       - name: Upload Performance Report (HTML)
         uses: actions/upload-artifact@v4
