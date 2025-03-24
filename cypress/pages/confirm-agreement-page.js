@@ -10,6 +10,11 @@ const CRITERIA_CHECKBOXES = [
 ];
 const CRITERIA_LABELS_SELECTOR = '.govuk-checkboxes__label';
 const CONTINUE_BUTTON_SELECTOR = '[data-testid="confirm-button"]';
+const criteriaMapping = {
+    "The organisation is eligible to enter into a partnership": '[data-testid="confirm-criteria-organisation-elegible"]',
+    "My local authority is suitable for nomination as the Primary authority": '[data-testid="confirm-criteria-authority-suitable"]',
+    "A written summary detailing the partnership has been created": '[data-testid="confirm-criteria-summary-created"]'
+};
 
 class ConfirmAgreementPage extends UiCommonActions {
 
@@ -29,12 +34,25 @@ class ConfirmAgreementPage extends UiCommonActions {
 
     checkAllCriteria() {
         CRITERIA_CHECKBOXES.forEach((checkboxSelector) => {
-            cy.get(checkboxSelector).check({ force: true });
+            cy.get(checkboxSelector).check({force: true});
         });
     }
 
     clickContinue() {
         cy.get(CONTINUE_BUTTON_SELECTOR).click();
+    }
+
+    selectSpecificCriteria(dataTable) {
+        const criteriaToCheck = dataTable.rawTable.flat();
+        criteriaToCheck.forEach((criterion) => {
+            const checkBoxSelector = criteriaMapping[criterion];
+            if (checkBoxSelector) {
+                this.checkRadioButton(checkBoxSelector);
+            }
+            else {
+                throw new Error(`Unknown criterion: ${criterion}  - Ensure it matches exactly as expected`);
+            }
+        })
     }
 }
 
