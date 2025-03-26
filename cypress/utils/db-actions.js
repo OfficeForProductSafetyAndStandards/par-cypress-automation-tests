@@ -1,14 +1,15 @@
-import { query } from './db.js';
 
-export async function setTermsAccepted(userIdentityId, value) {
-    await query(`
-    UPDATE "UserProfile"
-    SET "HasAcceptedTermsAndConditions" = $1
-    WHERE "UserIdentityId" = $2
-  `, [value, userIdentityId]);
-}
+export function setTermsForFirstUser(acceptedStr) {
+    const accepted = acceptedStr === 'true';
 
-export async function getFirstUserIdentityId() {
-    const result = await query(`SELECT "UserIdentityId" FROM "UserProfile" LIMIT 1`);
-    return result[0]?.UserIdentityId;
+    return cy.task('getFirstUserIdentityId').then((userId) => {
+        if (!userId) {
+            throw new Error('No user found in UserProfile');
+        }
+
+        return cy.task('setTermsAccepted', { userId, value: accepted }).then(() => {
+            cy.log(`✅ Updated HasAcceptedTermsAndConditions to ${accepted} for user ${userId}`);
+        });
+    });
 }
+ 

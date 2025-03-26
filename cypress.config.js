@@ -1,13 +1,14 @@
-const { defineConfig } = require('cypress');
+const {defineConfig} = require('cypress');
 const createBundler = require('@bahmutov/cypress-esbuild-preprocessor');
 const preprocessor = require('@badeball/cypress-cucumber-preprocessor');
 const createEsbuildPlugin = require('@badeball/cypress-cucumber-preprocessor/esbuild');
 const dotenv = require('dotenv');
 const fs = require('fs');
 const path = require('path');
+const dbUtils = require('./cypress/utils/db');
 
 const environment = process.env.CYPRESS_ENV || 'test';
-dotenv.config({ path: `.env.${environment}` });
+dotenv.config({path: `.env.${environment}`});
 
 const loadedEnv = {
     BASE_UI_URL: process.env.BASE_UI_URL,
@@ -15,6 +16,12 @@ const loadedEnv = {
     TEST_USER_ACCOUNT_ONE: process.env.TEST_USER_ACCOUNT_ONE,
     TEST_USER_ACCOUNT_TWO: process.env.TEST_USER_ACCOUNT_TWO,
     TEST_USER_PASSWORD: process.env.TEST_USER_PASSWORD,
+
+    DB_HOST: process.env.DB_HOST,
+    DB_PORT: process.env.DB_PORT,
+    DB_NAME: process.env.DB_NAME,
+    DB_USER: process.env.DB_USER,
+    DB_PASSWORD: process.env.DB_PASSWORD,
 };
 
 async function setupNodeEvents(on, config) {
@@ -39,11 +46,11 @@ async function setupNodeEvents(on, config) {
             return null;
         },
 
-        writeCsv({ filePath, content }) {
+        writeCsv({filePath, content}) {
             try {
                 const dir = path.dirname(filePath);
                 if (!fs.existsSync(dir)) {
-                    fs.mkdirSync(dir, { recursive: true });
+                    fs.mkdirSync(dir, {recursive: true});
                 }
 
                 fs.writeFileSync(filePath, content, 'utf8');
@@ -66,6 +73,13 @@ async function setupNodeEvents(on, config) {
 
             console.log(`📄 Unique file generated: ${filePath}`);
             return Promise.resolve(filePath);
+        },
+        getFirstUserIdentityId: async () => {
+            return await dbUtils.getFirstUserIdentityId();
+        },
+        setTermsAccepted: async ({userId, value}) => {
+            await dbUtils.setTermsAccepted(userId, value);
+            return null;
         },
     });
 
@@ -95,5 +109,5 @@ module.exports = defineConfig({
         configFile: 'cypress/report/reporter-config.json',
     },
 
-    env:loadedEnv,
+    env: loadedEnv,
 });

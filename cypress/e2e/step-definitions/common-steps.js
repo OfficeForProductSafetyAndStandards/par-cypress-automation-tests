@@ -6,7 +6,7 @@ import SelectPartnershipTypePage from "../../pages/select-partnership-type-page"
 import AddRegulatoryFunctionContactsPage from "../../pages/AddRegulatoryFunctionContactsPage";
 import AcceptTermsAndConditionsPage from "../../pages/AcceptTermsAndConditionsPage";
 import HomePage from "../../pages/home-page";
-import {getFirstUserIdentityId, setTermsAccepted} from "../../utils/db-actions";
+import {setTermsForFirstUser} from "../../utils/db-actions";
 
 
 const pages = {
@@ -44,10 +44,6 @@ Then(/^the page url has (.*)$/, function (urlSubString) {
     pages['HomePage'].validatePageUrlContainsString(urlSubString);
 });
 
-Given(/^has accepted terms and conditions is set to (false|true)$/,async function (acceptedStr) {
-    const accepted = acceptedStr === 'true';
-    const userId = await getFirstUserIdentityId();
-    if (!userId) throw new Error('No user found in UserProfile table');
-    await setTermsAccepted(userId, accepted);
-    console.log(`✅ Updated HasAcceptedTermsAndConditions to ${accepted} for user: ${userId}`);
+Given(/^has accepted terms and conditions is set to (false|true)$/, function (acceptedStr) {
+    setTermsForFirstUser(acceptedStr);
 });
