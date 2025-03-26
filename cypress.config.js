@@ -5,7 +5,6 @@ const createEsbuildPlugin = require('@badeball/cypress-cucumber-preprocessor/esb
 const dotenv = require('dotenv');
 const fs = require('fs');
 const path = require('path');
-const dbUtils = require('./cypress/utils/db');
 
 const environment = process.env.CYPRESS_ENV || 'test';
 dotenv.config({path: `.env.${environment}`});
@@ -74,11 +73,17 @@ async function setupNodeEvents(on, config) {
             console.log(`📄 Unique file generated: ${filePath}`);
             return Promise.resolve(filePath);
         },
-        getFirstUserIdentityId: async () => {
-            return await dbUtils.getFirstUserIdentityId();
+
+        async getFirstUserIdentityId() {
+            const result = await db.query(`SELECT "UserIdentityId" FROM "UserProfile" LIMIT 1`);
+            return result[0]?.UserIdentityId;
         },
-        setTermsAccepted: async ({userId, value}) => {
-            await dbUtils.setTermsAccepted(userId, value);
+
+        async setTermsAccepted({ userId, value }) {
+            await db.query(
+                `UPDATE "UserProfile" SET "HasAcceptedTermsAndConditions" = $1 WHERE "UserIdentityId" = $2`,
+                [value, userId]
+            );
             return null;
         },
     });
