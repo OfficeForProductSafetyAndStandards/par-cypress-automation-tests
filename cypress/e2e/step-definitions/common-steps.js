@@ -1,4 +1,4 @@
-import {Then} from '@badeball/cypress-cucumber-preprocessor';
+import {Given, Then} from '@badeball/cypress-cucumber-preprocessor';
 import ConfirmAgreementPage from '../../pages/confirm-agreement-page';
 import ApplyForPartnershipPage from '../../pages/apply-for-partnership-page';
 import StartPage from "../../pages/start-page";
@@ -6,6 +6,7 @@ import SelectPartnershipTypePage from "../../pages/select-partnership-type-page"
 import AddRegulatoryFunctionContactsPage from "../../pages/AddRegulatoryFunctionContactsPage";
 import AcceptTermsAndConditionsPage from "../../pages/AcceptTermsAndConditionsPage";
 import HomePage from "../../pages/home-page";
+import {getFirstUserIdentityId, setTermsAccepted} from "../../utils/db-actions";
 
 
 const pages = {
@@ -15,7 +16,7 @@ const pages = {
     SelectPartnershipTypePage: new SelectPartnershipTypePage(),
     AddRegulatoryFunctionContactsPage: new AddRegulatoryFunctionContactsPage(),
     AcceptTermsAndConditionsPage: new AcceptTermsAndConditionsPage(),
-    HomePage:new HomePage(),
+    HomePage: new HomePage(),
 };
 
 Then(/^I can read all information on the page$/, function (dataTable) {
@@ -41,4 +42,12 @@ Then(/^I navigate (back|forward) using browser$/, function (action) {
 
 Then(/^the page url has (.*)$/, function (urlSubString) {
     pages['HomePage'].validatePageUrlContainsString(urlSubString);
+});
+
+Given(/^has accepted terms and conditions is set to (false|true)$/,async function (acceptedStr) {
+    const accepted = acceptedStr === 'true';
+    const userId = await getFirstUserIdentityId();
+    if (!userId) throw new Error('No user found in UserProfile table');
+    await setTermsAccepted(userId, accepted);
+    console.log(`✅ Updated HasAcceptedTermsAndConditions to ${accepted} for user: ${userId}`);
 });

@@ -3,6 +3,7 @@ Feature: PAR Pages Navigation
 
   Scenario: Validate PAR Page Contents
     Given I am on the Start Page
+    And has accepted terms and conditions is set to false
     And I can read all information on the page
       | page      | content        |
       | StartPage | startPage.json |
