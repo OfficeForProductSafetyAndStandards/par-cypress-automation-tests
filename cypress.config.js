@@ -2,6 +2,7 @@ const {defineConfig} = require('cypress');
 const createBundler = require('@bahmutov/cypress-esbuild-preprocessor');
 const preprocessor = require('@badeball/cypress-cucumber-preprocessor');
 const createEsbuildPlugin = require('@badeball/cypress-cucumber-preprocessor/esbuild');
+const db = require('./cypress/utils/db');
 const dotenv = require('dotenv');
 const fs = require('fs');
 const path = require('path');
@@ -75,16 +76,38 @@ async function setupNodeEvents(on, config) {
         },
 
         async getFirstUserIdentityId() {
-            const result = await db.query(`SELECT "UserIdentityId" FROM "UserProfile" LIMIT 1`);
-            return result[0]?.UserIdentityId;
+            const result = await db.query(`SELECT "UserIdentityId"
+                                           FROM "UserProfile" LIMIT 1`);
+            return result[0]?.UserIdentityId || null;
         },
 
-        async setTermsAccepted({ userId, value }) {
+        async setTermsAccepted({userId, value}) {
             await db.query(
-                `UPDATE "UserProfile" SET "HasAcceptedTermsAndConditions" = $1 WHERE "UserIdentityId" = $2`,
+                `UPDATE "UserProfile"
+                 SET "HasAcceptedTermsAndConditions" = $1
+                 WHERE "UserIdentityId" = $2`,
                 [value, userId]
             );
             return null;
+        },
+
+        deleteUserById: async (userId) => {
+            await db.query(
+                `DELETE
+                 FROM "UserProfile"
+                 WHERE "UserIdentityId" = $1`,
+                [userId]
+            );
+            return `✅ User with ID ${userId} deleted from UserProfile`;
+        },
+        getUserByEmailQuery: async (email) => {
+            const result = await db.query(
+                `SELECT *
+                 FROM "UserIdentities"
+                 WHERE "EmailAddress" = $1`,
+                [email]
+            );
+            return result[0] || null;
         },
     });
 

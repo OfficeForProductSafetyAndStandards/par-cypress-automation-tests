@@ -6,7 +6,11 @@ import SelectPartnershipTypePage from "../../pages/select-partnership-type-page"
 import AddRegulatoryFunctionContactsPage from "../../pages/AddRegulatoryFunctionContactsPage";
 import AcceptTermsAndConditionsPage from "../../pages/AcceptTermsAndConditionsPage";
 import HomePage from "../../pages/home-page";
-import {setTermsForFirstUser} from "../../utils/db-actions";
+import {
+    deleteFirstUser,
+    setTermsAcceptedForSpecificUser,
+    setTermsForFirstUser
+} from "../../utils/db-actions";
 
 
 const pages = {
@@ -46,4 +50,13 @@ Then(/^the page url has (.*)$/, function (urlSubString) {
 
 Given(/^has accepted terms and conditions is set to (false|true)$/, function (acceptedStr) {
     setTermsForFirstUser(acceptedStr);
+});
+
+Given(/^the first user profile is deleted$/, function () {
+    deleteFirstUser();
+});
+
+Given(/^(.*) has accepted terms and conditions is set to (false|true)$/, function (user, acceptedStr) {
+    const userIdentityEmail = pages['HomePage'].getUserEmailFromEnvVars(user);
+    setTermsAcceptedForSpecificUser(userIdentityEmail, acceptedStr);
 });

@@ -1,4 +1,5 @@
 import UiCommonActions from './ui-common-actions';
+import {getUserByEmail} from "../utils/db-actions";
 
 const MAIN_HEADER_ELEMENT = 'h1';
 const SIGN_IN_BUTTON = '#sign-in-button';
@@ -59,6 +60,11 @@ class HomePage extends UiCommonActions {
 
     validatePageUrlContainsString(subString) {
         this.verifyPageUrlContains(subString);
+    }
+
+    getUserEmailFromEnvVars(user) {
+        const {username} = this.getUserCredential(user);
+        return getUserByEmail(username);
     }
 
 }
