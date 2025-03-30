@@ -30,13 +30,19 @@ export function setTermsAcceptedForSpecificUser(userId, acceptedStr) {
     });
 }
 
-export function getUserByEmail(email) {
-    return cy.task('getUserByEmailQuery', email).then((user) => {
-        if (!user) {
-            throw new Error(`❌ No user found with email: ${email}`);
+export function setTermsAcceptedForUserByEmail(email, acceptedStr) {
+    const accepted = acceptedStr === 'true';
+    return cy.task('getUserByEmail', email).then((userRecord) => {
+        if (!userRecord) {
+            throw new Error(`❌ No user found for ${email}`);
         }
-        cy.log(`✅ Found user with email: ${email}`);
-        return user;
+        const userId = userRecord.Id;
+        return cy.task('setTermsAccepted', {userId, value: accepted}).then(() => {
+            cy.log(`✅ Updated HasAcceptedTermsAndConditions to ${accepted} for user ${userId}`);
+        });
     });
 }
+
+
+
 

@@ -8,7 +8,7 @@ import AcceptTermsAndConditionsPage from "../../pages/AcceptTermsAndConditionsPa
 import HomePage from "../../pages/home-page";
 import {
     deleteFirstUser,
-    setTermsAcceptedForSpecificUser,
+    setTermsAcceptedForUserByEmail,
     setTermsForFirstUser
 } from "../../utils/db-actions";
 
@@ -57,6 +57,6 @@ Given(/^the first user profile is deleted$/, function () {
 });
 
 Given(/^(.*) has accepted terms and conditions is set to (false|true)$/, function (user, acceptedStr) {
-    const userIdentityEmail = pages['HomePage'].getUserEmailFromEnvVars(user);
-    setTermsAcceptedForSpecificUser(userIdentityEmail, acceptedStr);
+    const {username} = pages['HomePage'].getUserCredential(user);
+    setTermsAcceptedForUserByEmail(username, acceptedStr);
 });

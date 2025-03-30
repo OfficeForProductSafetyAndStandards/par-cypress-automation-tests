@@ -7,7 +7,6 @@ Feature:  Select Partnership
     And I can read all information on the page
       | page                         | content                       |
       | AcceptTermsAndConditionsPage | acceptTermsAndConditions.json |
- #    When I navigate to the PAR Home Page page
     When I navigate to the Select partnership type page
     And I can read all information on the page
       | page                      | content                    |

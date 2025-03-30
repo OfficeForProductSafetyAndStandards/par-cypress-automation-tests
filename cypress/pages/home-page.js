@@ -1,5 +1,4 @@
 import UiCommonActions from './ui-common-actions';
-import {getUserByEmail} from "../utils/db-actions";
 
 const MAIN_HEADER_ELEMENT = 'h1';
 const SIGN_IN_BUTTON = '#sign-in-button';

@@ -100,7 +100,8 @@ async function setupNodeEvents(on, config) {
             );
             return `✅ User with ID ${userId} deleted from UserProfile`;
         },
-        getUserByEmailQuery: async (email) => {
+
+        getUserByEmail: async (email) => {
             const result = await db.query(
                 `SELECT *
                  FROM "UserIdentities"
@@ -108,7 +109,7 @@ async function setupNodeEvents(on, config) {
                 [email]
             );
             return result[0] || null;
-        },
+        }
     });
 
 
