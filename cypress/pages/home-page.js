@@ -7,6 +7,12 @@ const PASSWORD_INPUT = '#password';
 const CONTINUE_BUTTON = 'Continue';
 const START_NOW_BUTTON = 'a.govuk-button--start';
 
+//my home page elements
+const HEADING_SELECTOR = '[data-testid="page-heading"]';
+const INTRO_TEXT_SELECTOR = 'p.govuk-body';
+const BULLET_ITEMS_SELECTOR = 'ul.govuk-list--bullet li';
+const APPLY_BUTTON_SELECTOR = '[data-testid="apply-button"]';
+
 const deepLinks = {
     "Apply for a new partnership": "authority/partnership-application/initiate/start",
     "PAR Home Page": "authority",
@@ -61,9 +67,15 @@ class HomePage extends UiCommonActions {
         this.verifyPageUrlContains(subString);
     }
 
-    getUserEmailFromEnvVars(user) {
-        const {username} = this.getUserCredential(user);
-        return getUserByEmail(username);
+    validatePageContent(content) {
+        this.elementShouldHaveTrimmedText(HEADING_SELECTOR, content.heading);
+        this.elementShouldHaveTrimmedText(INTRO_TEXT_SELECTOR, content.introText);
+
+        content.bullets.forEach((itemText) => {
+            this.elementContainsTrimmedText(BULLET_ITEMS_SELECTOR, itemText);
+        });
+
+        this.elementShouldHaveTrimmedText(APPLY_BUTTON_SELECTOR, content.button);
     }
 
 }
