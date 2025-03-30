@@ -3,21 +3,22 @@
   "paragraphs": [
     "This service supports the operation of the partnerships in the Primary authority scheme. It allows organisations to receive assured and tailored advice on meeting regulations through direct or co-ordinated partnerships with local authorities.",
     "Organisations can use this service to view details of their specific partnerships.",
-    "Enforcement Authorities can use this service to view, share or manage information on partnerships to guide enforcement work across the UK.",
-    "Primary Authorities must use this service to:",
-    "apply for new partnerships.",
-    "notify primary authorities of proposed enforcement actions against organisations in partnerships.",
-    "submit and publish inspection plans.",
-    "You will need a GOV.UK One Login to use this service. If you do not have a GOV.UK One Logon, you can create one.",
-    "If you have received an email inviting you to join the Primary Authority Register, you must use the same email address when creating your account in order to be connected to your invite.",
+    "Enforcement authorities can use this service to view, share or manage information on partnerships to guide enforcement work across the UK.",
+    "Primary authorities must use this service to:",
     "Need an account?",
-    "To get access to the Primary Authority Register:",
+    "This is an invite only service. To get access:",
     "Organisations",
-    "Call 0121 345 1201 or e-mail pa@businessandtrade.gov.uk to be guided through the registration process.",
-    "Enforcement Authorities",
     "Call 0121 345 1201 or e-mail pa@businessandtrade.gov.uk.",
-    "Primary Authorities / Local Authorities",
+    "Enforcement authorities",
+    "Call 0121 345 1201 or e-mail pa@businessandtrade.gov.uk.",
+    "Primary authorities / Local authorities",
     "Contact the local administrator at your local authority."
   ],
+  "bullets": [
+    "apply for new partnerships.",
+    "notify primary authorities of proposed enforcement actions against organisations in partnerships.",
+    "submit and publish inspection plans."
+  ],
+  "insetText": "You must use a GOV.UK One Login or Staff Single Sign On account to use this service.",
   "button": "Start now"
 }
