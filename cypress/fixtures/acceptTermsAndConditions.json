@@ -1,3 +1,6 @@
 {
-  "heading": "Accept the terms and conditions"
+  "heading": "Accept the terms and conditions",
+  "checkboxLabel": "I accept the terms and conditions",
+  "button": "Save and continue",
+  "termsLinkText": "Terms and conditions (opens in new tab)"
 }

@@ -77,6 +77,13 @@ class UiCommonActions {
         });
     }
 
+    verifyExternalPageContent({ origin, expectedText }) {
+        cy.origin(origin, () => {
+            cy.contains(expectedText).should('exist');
+        });
+    }
+
+
 }
 
 export default UiCommonActions;
