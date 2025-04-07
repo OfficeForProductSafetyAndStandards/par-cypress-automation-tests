@@ -78,6 +78,9 @@ class HomePage extends UiCommonActions {
         this.elementShouldHaveTrimmedText(APPLY_BUTTON_SELECTOR, content.button);
     }
 
+    verifyHeaderText(expectedText) {
+        this.waitForTextVisible(HEADING_SELECTOR, expectedText);
+    }
 }
 
 export default HomePage;

@@ -2,7 +2,7 @@ import UiCommonActions from './ui-common-actions';
 
 const PAGE_HEADING_SELECTOR = '[data-testid="page-heading"]';
 const COMPLETED_STEPS_SUMMARY_SELECTOR = '[data-testid="completed-steps-summary"]';
-
+const SAVE_AND_EXIT_BUTTON_SELECTOR = '[data-testid="save-and-exit-button"]';
 // Task 1
 const PARTNERSHIP_TYPE_TASK_SELECTOR = '[data-testid="partnership-type-task-list"]';
 const SELECT_PARTNERSHIP_TYPE_LINK = '[data-testid="select-partnership-type-link"]';
@@ -17,6 +17,7 @@ class PartnershipApplicationPage extends UiCommonActions {
 
     validatePageHeader(expectedHeader) {
         this.elementContainsText(PAGE_HEADING_SELECTOR, expectedHeader);
+        this.elementContainsText(SAVE_AND_EXIT_BUTTON_SELECTOR, 'Save and exit applicaiton');
     }
 
 
@@ -45,6 +46,10 @@ class PartnershipApplicationPage extends UiCommonActions {
 
     clickOnSelectPartnership() {
         this.clickOnElement(SELECT_PARTNERSHIP_TYPE_LINK);
+    }
+
+    clickOnTheSaveAndExitButton() {
+        this.clickOnElement(SAVE_AND_EXIT_BUTTON_SELECTOR);
     }
 }
 

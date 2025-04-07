@@ -1,3 +1,4 @@
+
 class UiCommonActions {
     openUrl(url) {
         cy.visit(url);
@@ -69,6 +70,10 @@ class UiCommonActions {
         });
     }
 
+    pageShouldHaveTrimmedText(expectedText) {
+        cy.contains(expectedText).should('exist');
+    }
+
     validateErrorMessages(errors) {
         errors.forEach(({testId, message}) => {
             cy.get(`[data-testid="${testId}"]`)
@@ -77,12 +82,15 @@ class UiCommonActions {
         });
     }
 
-    verifyExternalPageContent({ origin, expectedText }) {
+    verifyExternalPageContent({origin, expectedText}) {
         cy.origin(origin, () => {
             cy.contains(expectedText).should('exist');
         });
     }
 
+    waitForTextVisible(selector, expectedText) {
+        cy.get(selector).should('be.visible').and('contain.text', expectedText);
+    }
 
 }
 

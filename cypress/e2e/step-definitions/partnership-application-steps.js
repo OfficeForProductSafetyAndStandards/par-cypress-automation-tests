@@ -29,3 +29,6 @@ Then(/^I click on the add regulatory function contact link$/, function () {
 Then(/^I click on the select partnership type link$/, function () {
     partnershipApplicationPage.clickOnSelectPartnership();
 });
+When(/^I save and exit the application$/, function () {
+    partnershipApplicationPage.clickOnTheSaveAndExitButton();
+});

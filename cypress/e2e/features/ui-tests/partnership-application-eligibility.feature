@@ -1,7 +1,7 @@
 @regression @ui
-Feature: PAR Pages Navigation
+Feature: Partnership Application Eligibility and T&C Compliance
 
-  Scenario: Validate PAR Page Contents
+  Scenario: Verify user acceptance of T&Cs an eligibility before partnership application
     Given I am on the Start Page
     And has accepted terms and conditions is set to false
     And I can read all information on the page
@@ -9,8 +9,13 @@ Feature: PAR Pages Navigation
       | StartPage | startPage.json |
     And the page main header is Primary Authority Register
     And I signed in using testUserAccount
-    When I navigate to the PAR Home Page page
-    And I click on the Apply for a partnership button
+    And the page url has terms-conditions
+    And I have confirmed the acceptance of T&Cs and save and continue
+    And Primary Authority Register page is displayed
+    And I can read all information on the page
+      | page     | content       |
+      | HomePage | homePage.json |
+    And I click on the Apply for a new partnership button
     And I am navigated to the Apply for new partnership page
     Then I can read all information on the page
       | page                    | content                  |
@@ -35,8 +40,8 @@ Feature: PAR Pages Navigation
       | error-summary                  | There is a problem   |
       | confirm-criteria-error-message | Confirm all criteria |
       | confirm-criteria-error-summary | Confirm all criteria |
-    And I confirm that I meet the all criteria before continuing
+    When I confirm that I meet the all criteria before continuing
     And I click on the Continue button
-    And I am navigated to the Partnership Application page
+    Then I am navigated to the Partnership application page
 
 

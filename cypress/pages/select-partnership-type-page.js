@@ -6,6 +6,7 @@ const DETAILS_TEXT_SELECTOR = '[data-testid="page-details"] .govuk-details__text
 const DIRECT_RADIO_SELECTOR = '[data-testid="partnership-type-direct-radio"]';
 const COORDINATED_RADIO_SELECTOR = '[data-testid="partnership-type-coordinated-radio"]';
 const CONTINUE_BUTTON_SELECTOR = '[data-testid="continue-button"]';
+const BACK_LINK_SELECTOR = '[data-testid="back-button"]';
 
 class SelectPartnershipTypePage extends UiCommonActions {
 
@@ -15,6 +16,7 @@ class SelectPartnershipTypePage extends UiCommonActions {
         this.elementContainsText(DETAILS_TEXT_SELECTOR, content.detailsText.direct);
         this.elementContainsText(DETAILS_TEXT_SELECTOR, content.detailsText.coordinated);
         this.elementShouldHaveText(CONTINUE_BUTTON_SELECTOR, content.button);
+        this.elementShouldHaveText(BACK_LINK_SELECTOR, content.backLink);
     }
 
     selectPartnershipType(partnershipType) {
@@ -43,6 +45,10 @@ class SelectPartnershipTypePage extends UiCommonActions {
 
     verifyDetailsVisible() {
         cy.get(DETAILS_TEXT_SELECTOR).should('be.visible');
+    }
+
+    clickOnBacklink() {
+        this.clickOnElement(BACK_LINK_SELECTOR);
     }
 }
 

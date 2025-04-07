@@ -60,3 +60,7 @@ Given(/^(.*) has accepted terms and conditions is set to (false|true)$/, functio
     const {username} = pages['HomePage'].getUserCredential(user);
     setTermsAcceptedForUserByEmail(username, acceptedStr);
 });
+
+Given(/^(.*) page is displayed$/, function (expectedText) {
+    pages['HomePage'].verifyHeaderText(expectedText);
+});
