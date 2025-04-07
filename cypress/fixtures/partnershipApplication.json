@@ -1,11 +1,18 @@
 {
   "header": "Partnership application",
-  "numberOfSections": 6,
-  "completed": 0,
-  "taskOne": {
-    "status": "Not Yet Started"
+  "saveAndExitText": "Save and exit applicaiton",
+  "completedSummary": {
+    "done": 0,
+    "total": 6
   },
-  "taskTwo": {
-    "status": "Not Yet Started"
-  }
+  "tasks": [
+    {
+      "name": "Select partnership type",
+      "status": "Not Yet Started"
+    },
+    {
+      "name": "Add regulatory function contacts",
+      "status": "Cannot Start Yet"
+    }
+  ]
 }

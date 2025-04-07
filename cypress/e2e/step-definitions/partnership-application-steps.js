@@ -1,4 +1,4 @@
-import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
+import {Given, Then, When} from '@badeball/cypress-cucumber-preprocessor';
 import PartnershipApplicationPage from '../../pages/partnership-application-page';
 
 const partnershipApplicationPage = new PartnershipApplicationPage();
@@ -31,4 +31,11 @@ Then(/^I click on the select partnership type link$/, function () {
 });
 When(/^I save and exit the application$/, function () {
     partnershipApplicationPage.clickOnTheSaveAndExitButton();
+});
+
+
+Then(/^the partnership application page should display initial state using fixture "([^"]*)"$/, function (fixtureFile) {
+    cy.fixture(fixtureFile).then((pageContent) => {
+        partnershipApplicationPage.validateInitialState(pageContent);
+    });
 });

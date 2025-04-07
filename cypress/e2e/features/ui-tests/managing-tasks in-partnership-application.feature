@@ -1,7 +1,7 @@
 @regression @ui
-Feature:  Select Partnership
+Feature: Partnership Application
 
-  Scenario: Select Partnership Task
+  Scenario: Display initial state of Partnership Application after starting a new application
     Given I am on the Start Page
     And testUserAccount has accepted terms and conditions is set to false
     And I signed in using testUserAccount
@@ -12,8 +12,12 @@ Feature:  Select Partnership
     And I am navigated to the Apply for new partnership page
     And I click on the Start button
     And I confirm that I meet the all criteria before continuing
-    And I click on the Continue button
-    And I navigate to the Select partnership type page
+    When I click on the Continue button
+    Then the partnership application page should display initial state using fixture "partnershipApplication.json"
+
+
+  Scenario: Start and complete the 'Select Partnership Type' task with validations
+    Given I navigate to the Select partnership type page
     And I can read all information on the page
       | page                      | content                    |
       | SelectPartnershipTypePage | selectPartnershipType.json |
@@ -33,7 +37,10 @@ Feature:  Select Partnership
       | completed        | 1                           |
       | taskOneStatus    | Completed                   |
       | taskTwoStatus    | Not Yet Started             |
-    And I click on the add regulatory function contact link
+
+
+  Scenario: Navigate to and validate 'Add Regulatory Function Contacts' task
+    Given I click on the add regulatory function contact link
     And I can read all information on the page
       | page                              | content                            |
       | AddRegulatoryFunctionContactsPage | addRegulatoryFunctionContacts.json |
