@@ -1,18 +1,12 @@
 @regression @ui
 Feature: Partnership Application
 
+  Background:
+    Given I have started a new partnership application as testUserAccount
+
   Scenario: Display initial state of Partnership Application after starting a new application
-    Given I am on the Start Page
-    And testUserAccount has accepted terms and conditions is set to false
-    And I signed in using testUserAccount
-    And the page url has terms-conditions
-    And I have confirmed the acceptance of T&Cs and save and continue
-    And Primary Authority Register page is displayed
-    And I click on the Apply for a new partnership button
-    And I am navigated to the Apply for new partnership page
-    And I click on the Start button
-    And I confirm that I meet the all criteria before continuing
-    When I click on the Continue button
+    Given I am navigated to the Partnership application page
+    And the url should have applicationId
     Then the partnership application page should display initial state using fixture "partnershipApplication.json"
 
 

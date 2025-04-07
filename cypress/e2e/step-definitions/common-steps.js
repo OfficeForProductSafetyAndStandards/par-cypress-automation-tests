@@ -64,3 +64,20 @@ Given(/^(.*) has accepted terms and conditions is set to (false|true)$/, functio
 Given(/^(.*) page is displayed$/, function (expectedText) {
     pages['HomePage'].verifyHeaderText(expectedText);
 });
+
+Given(/^I have started a new partnership application as (.*)$/, function (user) {
+    pages['HomePage'].navigateToUrl('Start Page');
+    const { username } = pages['HomePage'].getUserCredential(user);
+    setTermsAcceptedForUserByEmail(username, false);
+    pages['HomePage'].signInWithEmailAndPassword(user);
+    pages['HomePage'].validatePageUrlContainsString('terms-conditions');
+    pages['AcceptTermsAndConditionsPage'].acceptTermsCheckbox();
+    pages['AcceptTermsAndConditionsPage'].clickSaveAndContinue();
+    pages['HomePage'].verifyHeaderText('Primary Authority Register');
+    pages['HomePage'].clickButtonByText('Apply for a new partnership');
+    pages['ApplyForPartnershipPage'].validatePageByPageTitle('Apply for new partnership');
+    pages['HomePage'].clickButtonByText('Start');
+    pages['ConfirmAgreementPage'].checkAllCriteria();
+    pages['HomePage'].clickButtonByText('Continue');
+});
+
