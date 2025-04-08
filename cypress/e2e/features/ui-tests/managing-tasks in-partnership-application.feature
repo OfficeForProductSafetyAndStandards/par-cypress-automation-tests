@@ -6,9 +6,8 @@ Feature: Partnership Application
 
   Scenario: Display initial state of Partnership Application after starting a new application
     Given I am navigated to the Partnership application page
-    And the url should have applicationId
+    And the page url has partnership-application/initiate/task-list
     Then the partnership application page should display initial state using fixture "partnershipApplication.json"
-
 
   Scenario: Start and complete the 'Select Partnership Type' task with validations
     Given I navigate to the Select partnership type page
@@ -23,8 +22,10 @@ Feature: Partnership Application
       | partnership-type-error-message | Select partnership type |
       | partnership-type-error-summary | Select partnership type |
     And I select coordinated as partnership type
-    And I click on the Continue button
-    And I am navigated to the Partnership application page
+    When I click on the Continue button
+    And the page url has partnership-application/initiate/task-list?applicationId=
+    And I wait for task page to be fully loaded with 1 expected completed
+    Then I am navigated to the Partnership application page
     And the partnership application page should have the following content
       | content          | partnershipApplication.json |
       | numberOfSections | 6                           |
@@ -34,10 +35,16 @@ Feature: Partnership Application
 
 
   Scenario: Navigate to and validate 'Add Regulatory Function Contacts' task
-    Given I click on the add regulatory function contact link
+    Given I click on the select partnership type link
+    And I select direct as partnership type
+    And I click on the Continue button
+    And the page url has partnership-application/initiate/task-list?applicationId=
+    And I am navigated to the Partnership application page
+    And I click on the add regulatory function contact link
     And I can read all information on the page
       | page                              | content                            |
       | AddRegulatoryFunctionContactsPage | addRegulatoryFunctionContacts.json |
+    And the page url has partnership-application/initiate/regulatory-function-contacts/list
     And I navigate back using browser
     And I click on the select partnership type link
     And I can read all information on the page

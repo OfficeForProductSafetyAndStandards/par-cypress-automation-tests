@@ -39,3 +39,6 @@ Then(/^the partnership application page should display initial state using fixtu
         partnershipApplicationPage.validateInitialState(pageContent);
     });
 });
+When(/^I wait for task page to be fully loaded with (\d+) expected completed$/, function (expectedCompleted) {
+    partnershipApplicationPage.waitForAndCaptureApplicationIdAndPageLoad(expectedCompleted);
+});

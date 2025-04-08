@@ -4,6 +4,7 @@ import UiCommonActions from './ui-common-actions';
 const PAGE_HEADING_SELECTOR = '[data-testid="page-heading"]';
 const SAVE_AND_EXIT_BUTTON_SELECTOR = '[data-testid="save-and-exit-button"]';
 const COMPLETED_STEPS_SUMMARY_SELECTOR = '[data-testid="completed-steps-summary"]';
+const COMPLETED_STEPS_COUNT = '[data-testid="completed-steps-done-count"]';
 
 // Task 1
 const PARTNERSHIP_TYPE_TASK_SELECTOR = '[data-testid="partnership-type-task-list"]';
@@ -51,25 +52,32 @@ class PartnershipApplicationPage extends UiCommonActions {
         this.clickOnElement(SAVE_AND_EXIT_BUTTON_SELECTOR);
     }
 
-    /**
-     * Dynamically validates initial state of the page using fixture values
-     * @param {Object} data
-     * @param {string} data.header
-     * @param {string} data.saveAndExitText
-     * @param {Object} data.completedSummary { done: number, total: number }
-     * @param {Array} data.tasks [{ name: string, status: string }]
-     */
-    validateInitialState({ header, saveAndExitText, completedSummary, tasks }) {
+    validateInitialState({header, saveAndExitText, completedSummary, tasks}) {
         this.elementShouldHaveTrimmedText(PAGE_HEADING_SELECTOR, header);
         this.elementShouldHaveTrimmedText(SAVE_AND_EXIT_BUTTON_SELECTOR, saveAndExitText);
 
         const summaryText = `You have completed ${completedSummary.done} of ${completedSummary.total} sections.`;
         this.elementShouldHaveTrimmedText(COMPLETED_STEPS_SUMMARY_SELECTOR, summaryText);
 
-        tasks.forEach(({ name, status }) => {
+        tasks.forEach(({name, status}) => {
             cy.contains('[data-testid$="-link"], [data-testid$="-link"] div', name).should('exist');
             cy.contains('[data-testid$="status-tag"]', status).should('exist');
         });
+    }
+
+    waitForAndCaptureApplicationIdAndPageLoad(expectedCompleted) {
+        return cy.url()
+            .should('include', 'task-list?applicationId')
+            .then((url) => {
+                const match = url.match(/applicationId=([a-f0-9-])/i);
+                const appId = match ? match[1] : null;
+                expect(appId).not.to.be.null;
+
+                Cypress.env('applicationId', appId);
+                cy.get(COMPLETED_STEPS_COUNT, {timeout: 2000})
+                    .should('have.text', expectedCompleted);
+                return appId;
+            });
     }
 }
 
