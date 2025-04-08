@@ -69,16 +69,16 @@ class PartnershipApplicationPage extends UiCommonActions {
         return cy.url()
             .should('include', 'task-list?applicationId')
             .then((url) => {
-                const match = url.match(/applicationId=([a-f0-9-])/i);
+                const match = url.match(/applicationId=([a-f0-9-]+)/i);
                 const appId = match ? match[1] : null;
-                expect(appId).not.to.be.null;
-
+                expect(appId).to.not.be.null;
                 Cypress.env('applicationId', appId);
-                cy.get(COMPLETED_STEPS_COUNT, {timeout: 2000})
+                return cy
+                    .get(COMPLETED_STEPS_COUNT, { timeout: 5000 })
                     .should('have.text', expectedCompleted);
-                return appId;
             });
     }
+
 }
 
 export default PartnershipApplicationPage;
