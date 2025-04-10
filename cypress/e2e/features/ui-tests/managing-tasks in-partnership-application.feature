@@ -38,7 +38,7 @@ Feature: Partnership Application
     Given I click on the select partnership type link
     And I select direct as partnership type
     And I click on the Continue button
-    And the page url has partnership-application/initiate/task-list?applicationId=
+    And I wait for task page to be fully loaded with 1 expected completed
     And I am navigated to the Partnership application page
     And I click on the add regulatory function contact link
     And I can read all information on the page
