@@ -20,7 +20,7 @@ class PartnershipApplicationPage extends UiCommonActions {
 
     validatePageHeader(expectedHeader) {
         this.elementContainsText(PAGE_HEADING_SELECTOR, expectedHeader);
-        this.elementContainsText(SAVE_AND_EXIT_BUTTON_SELECTOR, 'Save and exit applicaiton');
+        this.elementContainsText(SAVE_AND_EXIT_BUTTON_SELECTOR, 'Save and exit application');
     }
 
     validateCompletedSteps(numberOfSections, completed) {
