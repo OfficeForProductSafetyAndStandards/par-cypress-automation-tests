@@ -1,16 +1,13 @@
-import {Given, When,Then} from '@badeball/cypress-cucumber-preprocessor';
-import HomePage from "../../pages/home-page";
+import {Given, Then, When} from "@badeball/cypress-cucumber-preprocessor";
 import GetProfileActions from "../../api-actions/getProfileActions";
+let bearerToken;
+let profileResponse;
 
 const getProfileActions = new GetProfileActions();
 const homePage = new HomePage();
 
-let bearerToken;
-let profileResponse;
-
-Given('I authenticate via the get-auth-token endpoint with the following credentials:', (dataTable) => {
+Given('I authenticate via the get-auth-token endpoint with the following credentials:', function (dataTable) {
     const credentials = dataTable.rowsHash();
-
     const email = homePage.getUserCredential(credentials.Email).username;
     const impersonationApiKey = Cypress.env('IMPERSONATION_KEY');
 
@@ -22,19 +19,20 @@ Given('I authenticate via the get-auth-token endpoint with the following credent
         impersonationApiKey,
     };
 
-    const response = getProfileActions.getAuthToken(payload);
-    bearerToken = response.body.token;
+    return getProfileActions.getAuthToken(payload).then((res) => {
+        bearerToken = res.body.token;
+    });
 });
 
-When('I call the getMyProfile endpoint with the stored bearer token', () => {
-    profileResponse = getProfileActions.getProfile(bearerToken);
+When('I call the getMyProfile endpoint with the stored bearer token', function () {
+    return getProfileActions.getProfile(bearerToken).then((res) => {
+        profileResponse = res;
+    });
 });
 
-Then('the response should contain a valid profile with all expected attributes', () => {
+Then('the response should contain a valid profile with all expected attributes', function () {
     const profile = profileResponse.body;
-//{
-//     "hasAcceptedTermsAndConditions": true
-// }
+
     expect(profile).to.have.property('userId');
     expect(profile).to.have.property('emailAddress');
     expect(profile).to.have.property('roles').that.is.an('array');

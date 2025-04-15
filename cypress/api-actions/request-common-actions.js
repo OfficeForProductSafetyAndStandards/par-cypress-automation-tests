@@ -1,5 +1,5 @@
 class RequestCommonActions {
-    async getRequest(url, headers = {}) {
+    getRequest(url, headers = {}) {
         return cy
             .request({
                 method: 'GET',
@@ -7,10 +7,10 @@ class RequestCommonActions {
                 headers,
                 failOnStatusCode: false,
             })
-            .then((response) => this.handleResponse(response));
+            .then(this.handleResponse);
     }
 
-    async postRequest(url, body, headers = {}) {
+    postRequest(url, body, headers = {}) {
         return cy
             .request({
                 method: 'POST',
@@ -19,33 +19,10 @@ class RequestCommonActions {
                 headers,
                 failOnStatusCode: false,
             })
-            .then((response) => this.handleResponse(response));
+            .then(this.handleResponse);
     }
 
-    async putRequest(url, body, headers = {}) {
-        return cy
-            .request({
-                method: 'PUT',
-                url,
-                body,
-                headers,
-                failOnStatusCode: false,
-            })
-            .then((response) => this.handleResponse(response));
-    }
-
-    async deleteRequest(url, headers = {}) {
-        return cy
-            .request({
-                method: 'DELETE',
-                url,
-                headers,
-                failOnStatusCode: false,
-            })
-            .then((response) => this.handleResponse(response));
-    }
-
-    async handleResponse(response) {
+    handleResponse(response) {
         const status = response.status;
         const contentType = response.headers['content-type'];
         let body = response.body;
@@ -61,5 +38,3 @@ class RequestCommonActions {
         return { status, body: response.body };
     }
 }
-
-module.exports = RequestCommonActions;

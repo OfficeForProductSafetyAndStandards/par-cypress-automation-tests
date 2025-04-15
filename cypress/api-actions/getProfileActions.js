@@ -1,11 +1,11 @@
 const RequestCommonActions = require("./request-common-actions");
 
 class GetProfileActions extends RequestCommonActions {
-    async getAuthToken(payload) {
+     getAuthToken(payload) {
         return this.postRequest(`${Cypress.env('API_URL')}/get-auth-token`, payload);
     }
 
-    async getProfile(bearerToken) {
+     getProfile(bearerToken) {
         const headers = {
             Authorization: `Bearer ${bearerToken}`,
         };
