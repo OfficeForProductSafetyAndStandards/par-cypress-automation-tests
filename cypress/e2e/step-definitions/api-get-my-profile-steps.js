@@ -8,11 +8,11 @@ const homePage = new HomePage();
 let bearerToken;
 let profileResponse;
 
-Given('I authenticate via the get-auth-token endpoint with the following credentials:', async (dataTable) => {
+Given('I authenticate via the get-auth-token endpoint with the following credentials:', (dataTable) => {
     const credentials = dataTable.rowsHash();
 
     const email = homePage.getUserCredential(credentials.Email).username;
-    const impersonationApiKey = Cypress.env(credentials.ImpersonationApiKey);
+    const impersonationApiKey = Cypress.env('IMPERSONATION_KEY');
 
     const payload = {
         idToken: credentials.IdToken,
@@ -22,17 +22,19 @@ Given('I authenticate via the get-auth-token endpoint with the following credent
         impersonationApiKey,
     };
 
-    const response = await getProfileActions.getAuthToken(payload);
+    const response = getProfileActions.getAuthToken(payload);
     bearerToken = response.body.token;
 });
 
-When('I call the getMyProfile endpoint with the stored bearer token', async () => {
-    profileResponse = await getProfileActions.getProfile(bearerToken);
+When('I call the getMyProfile endpoint with the stored bearer token', () => {
+    profileResponse = getProfileActions.getProfile(bearerToken);
 });
 
 Then('the response should contain a valid profile with all expected attributes', () => {
     const profile = profileResponse.body;
-
+//{
+//     "hasAcceptedTermsAndConditions": true
+// }
     expect(profile).to.have.property('userId');
     expect(profile).to.have.property('emailAddress');
     expect(profile).to.have.property('roles').that.is.an('array');
