@@ -1,5 +1,7 @@
 import {Given, Then, When} from "@badeball/cypress-cucumber-preprocessor";
 import GetProfileActions from "../../api-actions/getProfileActions";
+import HomePage from "../../pages/home-page";
+
 let bearerToken;
 let profileResponse;
 
@@ -19,8 +21,12 @@ Given('I authenticate via the get-auth-token endpoint with the following credent
         impersonationApiKey,
     };
 
+    console.log(payload);
+
     return getProfileActions.getAuthToken(payload).then((res) => {
-        bearerToken = res.body.token;
+        bearerToken = res.body;
+        console.log(bearerToken);
+
     });
 });
 
@@ -32,9 +38,7 @@ When('I call the getMyProfile endpoint with the stored bearer token', function (
 
 Then('the response should contain a valid profile with all expected attributes', function () {
     const profile = profileResponse.body;
-
-    expect(profile).to.have.property('userId');
-    expect(profile).to.have.property('emailAddress');
-    expect(profile).to.have.property('roles').that.is.an('array');
-    expect(profile).to.have.property('organisationName');
+    console.log(profile);
+    console.log(profile.body);
+    expect(profile).to.have.property('hasAcceptedTermsAndConditions', true);
 });

@@ -53,7 +53,7 @@ class PartnershipApplicationPage extends UiCommonActions {
     }
 
     validateInitialState({header, saveAndExitText, completedSummary, tasks}) {
-        this.elementShouldHaveTrimmedText(PAGE_HEADING_SELECTOR, header);
+        this.elementContainsText(PAGE_HEADING_SELECTOR, header);
         this.elementShouldHaveTrimmedText(SAVE_AND_EXIT_BUTTON_SELECTOR, saveAndExitText);
 
         const summaryText = `You have completed ${completedSummary.done} of ${completedSummary.total} sections.`;

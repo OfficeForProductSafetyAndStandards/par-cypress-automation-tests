@@ -16,6 +16,9 @@ const loadedEnv = {
     TEST_USER_ACCOUNT_ONE: process.env.TEST_USER_ACCOUNT_ONE,
     TEST_USER_ACCOUNT_TWO: process.env.TEST_USER_ACCOUNT_TWO,
     TEST_USER_PASSWORD: process.env.TEST_USER_PASSWORD,
+    API_URL: process.env.API_URL,
+    IMPERSONATION_KEY: process.env.IMPERSONATION_KEY,
+
 
     DB_HOST: process.env.DB_HOST,
     DB_PORT: process.env.DB_PORT,

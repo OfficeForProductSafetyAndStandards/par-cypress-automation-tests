@@ -38,3 +38,5 @@ class RequestCommonActions {
         return { status, body: response.body };
     }
 }
+
+module.exports = RequestCommonActions;
